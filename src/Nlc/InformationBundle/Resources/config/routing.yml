@@ -1,0 +1,11 @@
+nlc_information_homepage:
+    path:     /
+    defaults: { _controller: NlcInformationBundle:Default:index }
+
+nlc_information_login:
+    path:     /login
+    defaults: { _controller: NlcInformationBundle:Default:login }
+
+nlc_information_admin:
+    path:     /admintools
+    defaults: { _controller: NlcInformationBundle:Default:admin }

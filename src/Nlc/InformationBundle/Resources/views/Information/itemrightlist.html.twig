@@ -1,0 +1,68 @@
+<div class="col-sm-10" >
+    <div class="row">
+        <div class="col-xs-6" ><input type="text" class="form-control" placeholder="检索姓名"></div>
+        <div class="col-xs-3" ><input class="btn btn-default" type="submit" value="搜索"></div>
+        <div class="col-xs-3 "><input class="btn btn-default pull-right" type="submit" data-toggle="modal" data-target="#myModal" value="资料录入"></div>
+
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>照片</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>学历</th>
+                <th>简历下载</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td><img src="{{ asset('bundles/nlcinformation/images/avatar1_small.jpg') }}" /></td>
+                <td>张三</td>
+                <td>男</td>
+                <td>25</td>
+                <td>研究生</td>
+                <td>张三简历<a>下载</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#myModalUpdate">编辑</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><img src="{{ asset('bundles/nlcinformation/images/avatar1_small.jpg') }}" /></td>
+                <td>李四</td>
+                <td>女</td>
+                <td>26</td>
+                <td>研究生</td>
+                <td>李四简历<a>下载</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#myModalUpdate">编辑</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><img src="{{ asset('bundles/nlcinformation/images/avatar1_small.jpg') }}" /></td>
+                <td>王五</td>
+                <td>男</td>
+                <td>46</td>
+                <td>研究生</td>
+                <td>王五简历<a>下载</a></td>
+                <td><a href="javascript:;" data-toggle="modal" data-target="#myModal">编辑</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+</div>

@@ -1,0 +1,36 @@
+<style>
+    @media (min-width: 970px) {
+        .container-fluid .nav-sidebar{display:block;}
+    }
+    .nav-sidebar > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+        color: #fff;
+        background-color: #428bca;
+    }
+</style>
+<nav id="navbar-example" class="navbar navbar-default navbar-static" role="navigation">
+    <div class="container-fluid">
+        <!--手机浏览时显示-->
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!--手机浏览时显示 结束-->
+        <a class="navbar-brand" href="#">信息管理</a>
+        <ul class="nav pull-right" >
+            <!-- 登录的用户信息 -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img alt="" src="{{ asset('bundles/nlcinformation/images/avatar1_small.jpg') }}">
+                    <span>XMAN</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="login.html"><i class="icon-key"></i>退出</a></li>
+                </ul>
+            </li>
+            <!-- 登录的用户信息 结束 -->
+        </ul>
+    </div><!-- /.container-fluid -->
+</nav>

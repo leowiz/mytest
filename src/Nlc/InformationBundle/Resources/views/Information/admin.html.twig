@@ -1,0 +1,15 @@
+{% extends "NlcInformationBundle::layout.html.twig" %}
+
+{% block itemtophead %}
+    {% include "NlcInformationBundle:Information:itemtophead.html.twig" %}
+{% endblock %}
+{% block itemcontent %}
+    {% include "NlcInformationBundle:Information:itemleftmenu.html.twig" %}
+    {% include "NlcInformationBundle:Information:itemrightlist.html.twig" %}
+{% endblock %}
+{% block  itemadd %}
+    {% include "NlcInformationBundle:Information:itemadd.html.twig" %}
+{% endblock %}
+{% block  itemupdate %}
+    {% include "NlcInformationBundle:Information:itemupdate.html.twig" %}
+{% endblock %}

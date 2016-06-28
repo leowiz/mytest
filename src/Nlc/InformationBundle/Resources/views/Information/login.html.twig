@@ -1,0 +1,19 @@
+{% extends 'NlcInformationBundle::base.html.twig' %}
+
+{% block itembody %}
+    <style>
+        form{max-width: 330px; margin:0 auto;}
+        form .form-control{ padding-bottom:10px;}
+    </style>
+    <div class="container">
+
+        <form role="form">
+            <h2>请在这里登录吧！</h2>
+            <input type="email" class="form-control" placeholder="用户名" required autofocus>
+            <input type="password" class="form-control" placeholder="密码" required>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        </form>
+
+    </div> <!-- /container -->
+{% endblock %}
