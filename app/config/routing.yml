@@ -1,3 +1,11 @@
+nlc_information_employee:
+    resource: "@NlcInformationBundle/Controller/EmployeeController.php"
+    type:     annotation
+
+nlc_information_category:
+    resource: "@NlcInformationBundle/Controller/CategoryController.php"
+    type:     annotation
+
 nlc_information:
     resource: "@NlcInformationBundle/Resources/config/routing.yml"
     prefix:   /

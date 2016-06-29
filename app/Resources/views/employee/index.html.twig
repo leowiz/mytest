@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Employee list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Sex</th>
+                <th>Education</th>
+                <th>Photo</th>
+                <th>File</th>
+                <th>Categoryid</th>
+                <th>Createtime</th>
+                <th>Updatetime</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td><a href="{{ path('nlc_employee_show', { 'id': employee.id }) }}">{{ employee.id }}</a></td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.age }}</td>
+                <td>{{ employee.sex }}</td>
+                <td>{{ employee.education }}</td>
+                <td>{{ employee.photo }}</td>
+                <td>{{ employee.file }}</td>
+                <td>{{ employee.categoryid }}</td>
+                <td>{{ employee.createtime }}</td>
+                <td>{{ employee.updatetime }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('nlc_employee_show', { 'id': employee.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('nlc_employee_edit', { 'id': employee.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('nlc_employee_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}
