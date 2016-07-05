@@ -27,23 +27,25 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ employee.photo }}</td>
+                <td><img src="{{ asset(employee.photopath) }}" /></td>
+                {#<td>{{ employee.photo }}</td>#}
             </tr>
             <tr>
                 <th>File</th>
-                <td>{{ employee.file }}</td>
+                <td><img src="{{ asset(employee.jlpath) }}" /></td>
+                {#<td>{{ employee.file }}</td>#}
             </tr>
-            <tr>
-                <th>Categoryid</th>
-                <td>{{ employee.categoryid }}</td>
-            </tr>
+            {#<tr>#}
+                {#<th>Categoryid</th>#}
+                {#<td>{{ employee.categoryid }}</td>#}
+            {#</tr>#}
             <tr>
                 <th>Createtime</th>
-                <td>{{ employee.createtime }}</td>
+                <td>{{ employee.createtime|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Updatetime</th>
-                <td>{{ employee.updatetime }}</td>
+                <td>{{ employee.updatetime|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
     </table>

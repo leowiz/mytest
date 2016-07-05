@@ -3,12 +3,16 @@
 namespace Nlc\InformationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Employee
  *
  * @ORM\Table(name="employeetable")
  * @ORM\Entity(repositoryClass="Nlc\InformationBundle\Repository\EmployeeRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Employee
 {
@@ -76,16 +80,16 @@ class Employee
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=255)
+     * @ORM\Column(name="photopath", type="string", length=255)
      */
-    private $photo;
+    private $photopath;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="file", type="string", length=255)
+     * @ORM\Column(name="jlpath", type="string", length=255)
      */
-    private $file;
+    private $jlpath;
 
     /**
      * @var int
@@ -97,17 +101,71 @@ class Employee
     /**
      * @var string
      *
-     * @ORM\Column(name="createtime", type="string", length=255)
+     * @ORM\Column(name="createtime", type="datetime")
      */
     private $createtime;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="updatetime", type="string", length=255)
+     * @ORM\Column(name="updatetime", type="datetime")
      */
     private $updatetime;
 
+    private $photouniqid;
+
+    private $jlfileuniqid;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $photofile;
+
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $jlfile;
+
+    /**
+     * Sets photofile.
+     *
+     * @param UploadedFile $photofile
+     */
+    public function setPhotofile(UploadedFile $photofile = null)
+    {
+        $this->photofile = $photofile;
+    }
+
+    /**
+     * Get photofile.
+     *
+     * @return UploadedFile
+     */
+    public function getPhotofile()
+    {
+        return $this->photofile;
+    }
+
+    /**
+     * Sets jlfile.
+     *
+     * @param UploadedFile $jlfile
+     */
+    public function setJlfile(UploadedFile $jlfile = null)
+    {
+        $this->jlfile = $jlfile;
+
+    }
+
+    /**
+     * Get jlfile.
+     *
+     * @return UploadedFile
+     */
+    public function getJlfile()
+    {
+        return $this->jlfile;
+    }
 
     /**
      * Get id
@@ -216,51 +274,51 @@ class Employee
     }
 
     /**
-     * Set photo
+     * Set photopath
      *
-     * @param string $photo
+     * @param string $photopath
      *
      * @return Employee
      */
-    public function setPhoto($photo)
+    public function setPhotopath($photopath)
     {
-        $this->photo = $photo;
+        $this->photopath = $photopath;
 
         return $this;
     }
 
     /**
-     * Get photo
+     * Get Photopath
      *
      * @return string
      */
-    public function getPhoto()
+    public function getPhotopath()
     {
-        return $this->photo;
+        return $this->photopath;
     }
 
     /**
-     * Set file
+     * Set jlpath
      *
-     * @param string $file
+     * @param string $jlpath
      *
      * @return Employee
      */
-    public function setFile($file)
+    public function setJlpath($jlpath)
     {
-        $this->file = $file;
+        $this->jlpath = $jlpath;
 
         return $this;
     }
 
     /**
-     * Get file
+     * Get Jlpath
      *
      * @return string
      */
-    public function getFile()
+    public function getJlpath()
     {
-        return $this->file;
+        return $this->jlpath;
     }
 
     /**
@@ -290,7 +348,7 @@ class Employee
     /**
      * Set createtime
      *
-     * @param string $createtime
+     * @param \DateTime $createtime
      *
      * @return Employee
      */
@@ -304,7 +362,7 @@ class Employee
     /**
      * Get createtime
      *
-     * @return string
+     * @return \DateTime
      */
     public function getCreatetime()
     {
@@ -314,7 +372,7 @@ class Employee
     /**
      * Set updatetime
      *
-     * @param string $updatetime
+     * @param \DateTime $updatetime
      *
      * @return Employee
      */
@@ -328,11 +386,103 @@ class Employee
     /**
      * Get updatetime
      *
-     * @return string
+     * @return \DateTime
      */
     public function getUpdatetime()
     {
         return $this->updatetime;
+    }
+
+    protected function getRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/';
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return $this->getRootDir().$this->getUploadDir();
+    }
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/documents';
+    }
+
+    ///////////////////////
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function preUpload()
+    {
+        $this->photouniqid=uniqid();
+        $this->jlfileuniqid=uniqid();
+
+        if (null !== $this->getPhotofile()) {
+            $this->photopath = $this->getUploadDir()."/".$this->photouniqid.'photo.'.$this->getPhotofile()->guessExtension();
+        }
+        if (null !== $this->getJlfile()) {
+            $this->jlpath = $this->getUploadDir()."/".$this->jlfileuniqid.'jlfile.'.$this->getJlfile()->guessExtension();
+        }
+    }
+
+    ////////////////////////
+    /**
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function photoupload()
+    {
+        //判断是否上传文件是否成功
+        if (null === $this->getPhotofile()) {
+            return;
+        }
+
+        //完成文件上传
+        $this->getPhotofile()->move(
+            $this->getUploadRootDir(),
+            $this->photouniqid.'photo.'.$this->getPhotofile()->guessExtension()
+        );
+
+        $this->setPhotofile(null);
+    }
+
+    /**
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function jlupload()
+    {
+        if (null === $this->getJlfile()) {
+            return;
+        }
+
+
+        $this->getJlfile()->move(
+            $this->getUploadRootDir(),
+            $this->jlfileuniqid.'jlfile.'.$this->getJlfile()->guessExtension()
+        );
+
+        $this->setJlpath(null);
+    }
+
+    ////////////////////
+    /**
+     * @ORM\PostRemove
+     */
+    public function removeUpload()
+    {
+        if(file_exists($this->photopath)) {
+            unlink($this->getRootDir().$this->photopath);
+        }
+        if(file_exists($this->jlpath)) {
+            unlink($this->getRootDir().$this->jlpath);
+        }
     }
 }
 

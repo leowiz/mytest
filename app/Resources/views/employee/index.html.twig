@@ -27,11 +27,11 @@
                 <td>{{ employee.age }}</td>
                 <td>{{ employee.sex }}</td>
                 <td>{{ employee.education }}</td>
-                <td>{{ employee.photo }}</td>
-                <td>{{ employee.file }}</td>
+                <td>{{ employee.photopath }}</td>
+                <td>{{ employee.jlpath }}</td>
                 <td>{{ employee.categoryid }}</td>
-                <td>{{ employee.createtime }}</td>
-                <td>{{ employee.updatetime }}</td>
+                <td>{{ employee.createtime|date('Y-m-d H:i:s') }}</td>
+                <td>{{ employee.updatetime|date('Y-m-d H:i:s') }}</td>
                 <td>
                     <ul>
                         <li>
