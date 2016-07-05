@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Employee list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -13,7 +13,7 @@
                 <th>Education</th>
                 <th>Photo</th>
                 <th>File</th>
-                <th>Categoryid</th>
+                {#<th>Categoryid</th>#}
                 <th>Createtime</th>
                 <th>Updatetime</th>
                 <th>Actions</th>
@@ -29,7 +29,7 @@
                 <td>{{ employee.education }}</td>
                 <td>{{ employee.photopath }}</td>
                 <td>{{ employee.jlpath }}</td>
-                <td>{{ employee.categoryid }}</td>
+                {#<td>{{ employee.categoryid }}</td>#}
                 <td>{{ employee.createtime|date('Y-m-d H:i:s') }}</td>
                 <td>{{ employee.updatetime|date('Y-m-d H:i:s') }}</td>
                 <td>

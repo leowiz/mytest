@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Employee</h1>
 
-    <table>
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -46,6 +46,10 @@
             <tr>
                 <th>Updatetime</th>
                 <td>{{ employee.updatetime|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ employee.category }}</td>
             </tr>
         </tbody>
     </table>
